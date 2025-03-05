@@ -2,11 +2,10 @@
 "use client";
 import { login } from "@/redux/features/auth/authAPI";
 import { AppDispatch } from "@/redux/store";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Image from 'next/image';
-import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -81,7 +80,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-300">
               Do not have an account?{' '}
-              <Link href="/register" className="text-sky-800 hover:text-sky-600">Sign Up</Link>
+              <Link href="/auth/register" className="text-sky-800 hover:text-sky-600">Sign Up</Link>
           </p>
       </div>
   </div>

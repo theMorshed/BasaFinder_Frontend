@@ -1,5 +1,7 @@
 // pages/rentals.tsx
 
+import Image from "next/image";
+
 const rentals = [
   {
     id: 1,
@@ -34,6 +36,14 @@ const rentals = [
 const RentalsPage = () => {
   return (
     <div className="bg-gray-50">
+        {/* Banner Section */}
+        <div className="relative w-full h-64 bg-gray-800">
+            <div className="absolute inset-0 flex items-center justify-center text-white">
+                <h1 className="text-[35px] md:text-[38px] lg:text-[50px] xl:text-[6xl] 2xl:text-[65px] text-white font-bold">
+                All Rental Houses
+                </h1>
+            </div>
+        </div>
 
       <main className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
@@ -46,11 +56,9 @@ const RentalsPage = () => {
                 key={rental.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
               >
-                <img
-                  src={rental.image}
+                <Image src={rental.image}
                   alt={rental.name}
-                  className="w-full h-48 object-cover"
-                />
+                  className="w-full h-48 object-cover" width={500} height={400} />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800">{rental.name}</h3>
                   <p className="text-sm text-gray-500 mb-2">{rental.location}</p>

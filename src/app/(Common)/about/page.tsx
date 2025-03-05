@@ -4,14 +4,14 @@ const AboutUs = () => {
   return (
     <div className="bg-gray-50">
 
-        {/* Banner Section */}
-        <div className="relative w-full h-64 bg-gray-800">
-            <div className="absolute inset-0 flex items-center justify-center text-white">
-                <h1 className="text-[35px] md:text-[38px] lg:text-[50px] xl:text-[6xl] 2xl:text-[65px] text-white font-bold">
-                About Us
-                </h1>
-            </div>
-        </div>
+      {/* Banner Section */}
+      <div className="relative w-full h-64 bg-gray-800">
+          <div className="absolute inset-0 flex items-center justify-center text-white">
+              <h1 className="text-[35px] md:text-[38px] lg:text-[50px] xl:text-[6xl] 2xl:text-[65px] text-white font-bold">
+              About Us
+              </h1>
+          </div>
+      </div>
 
       <main className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
