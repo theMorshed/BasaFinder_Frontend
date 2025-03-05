@@ -31,31 +31,31 @@ const Navbar = () => {
     
 
     return (
-        <nav className="bg-white text-sky-800 p-4">
+        <nav className="bg-white text-sky-800 p-4 py-6">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo */}
                 <div className="text-2xl font-bold">
-                    <Link href="/">MORSHED</Link>
+                    <Link href="/">BasaFinder</Link>
                 </div>
 
                 {/* Desktop Menu */}
                 <ul className="hidden sm:flex space-x-6 font-bold">                     
                     {user? (
                         <>
+                            <Link href="/" className="hover:text-sky-950">Home</Link>
+                            <Link href="/about" className="hover:text-sky-950">About Us</Link>
+                            <Link href="/rental" className="hover:text-sky-950">All Rentals</Link>
                             <Link href="/dashboard" className="hover:text-sky-950">Dashboard</Link>
-                            <Link href="/dashboard/projects" className="hover:text-sky-950">Manage Projects</Link>
-                            <Link href="/dashboard/blogs" className="hover:text-sky-950">Manage Blogs</Link>
-                            <Link href="/dashboard/message" className="hover:text-sky-950">Manage Messages</Link>
+                            <Link href="/dashboard/profile" className="hover:text-sky-950">My Profile</Link>
                             <Link onClick={handleLogout} href="/auth/login" className="hover:text-sky-950">Logout</Link>
                         </>
                     ): (
                         <>
                             <Link href="/" className="hover:text-sky-950">Home</Link>
-                            <Link href="/projects" className="hover:text-sky-950">Projects</Link>
-                            <Link href="/contact" className="hover:text-sky-950">Contact</Link>
-                            <Link href="/blogs" className="hover:text-sky-950">Blogs</Link> 
+                            <Link href="/about" className="hover:text-sky-950">About Us</Link>
+                            <Link href="/rental" className="hover:text-sky-950">All Rentals</Link>
                             <Link href="/auth/login" className="hover:text-sky-950">Login</Link>
-                            <Link href="/register" className="hover:text-sky-950">Register</Link>
+                            <Link href="/auth/register" className="hover:text-sky-950">Register</Link>
                         </>
                     )}
                 </ul>
@@ -72,20 +72,20 @@ const Navbar = () => {
                     <ul className="space-y-4 font-bold">                   
                         {user? (
                             <>
+                                <Link href="/" className="block hover:text-sky-950">Home</Link>
+                                <Link href="/about" className="block hover:text-sky-950">About Us</Link>
+                                <Link href="/rental" className="block hover:text-sky-950">All Rentals</Link>
                                 <Link href="/dashboard" className="block hover:text-sky-950">Dashboard</Link>
-                                <Link href="/dashboard/projects" className="block hover:text-sky-950">Manage Projects</Link>
-                                <Link href="/dashboard/blogs" className="block hover:text-sky-950">Manage Blogs</Link>
-                                <Link href="/dashboard/message" className="block hover:text-sky-950">Manage Messages</Link>
-                                <Link onClick={handleLogout} href="/auth/login" className="block hover:text-sky-950">Logout</Link>
+                                <Link href="/dashboard/profile" className="block hover:text-sky-950">My Profile</Link>
+                                <Link onClick={handleLogout} href="/auth/login" className="block hover:text-sky-950">Logout</Link>                                
                             </>
                         ): (
                             <>
                                 <Link href="/" className="block hover:text-sky-950">Home</Link>
-                                <Link href="/projects" className="block hover:text-sky-950">Projects</Link>
-                                <Link href="/contact" className="block hover:text-sky-950">Contact</Link>
-                                <Link href="/blog" className="block hover:text-sky-950">Blogs</Link>                             
+                                <Link href="/about" className="block hover:text-sky-950">About Us</Link>
+                                <Link href="/rental" className="block hover:text-sky-950">All Rentals</Link>
                                 <Link href="/auth/login" className="block hover:text-sky-950">Login</Link>
-                                <Link href="/register" className="block hover:text-sky-950">Register</Link>
+                                <Link href="/auth/register" className="block hover:text-sky-950">Register</Link>
                             </>
                         )}                        
                     </ul>
