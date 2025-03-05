@@ -16,7 +16,6 @@ const Navbar = () => {
     // Toggle mobile menu
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const user = useSelector((state: RootState) => state.auth.user);
-    console.log(user?.role);
 
     useEffect(() => {
         setHydrated(true);
