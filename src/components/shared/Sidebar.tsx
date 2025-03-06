@@ -13,7 +13,8 @@ const Sidebar: FC<SidebarProps> = ({ user, handleLogout }) => {
   const links = [
     { role: "admin", name: "Manage Users", href: "/dashboard/admin/users" },
     { role: "admin", name: "Manage Rental House", href: "/dashboard/admin/house" },
-    { role: "landlord", name: "Manage Properties", href: "/dashboard/landlord/properties" },
+    { role: "landlord", name: "Manage Properties", href: "/dashboard/landlord/house" },
+    { role: "landlord", name: "Create House", href: "/dashboard/landlord/create-house" },
     { role: "landlord", name: "View Tenants", href: "/dashboard/landlord/tenants" },
     { role: "tenant", name: "View Rentals", href: "/dashboard/tenant/rentals" },
     { role: "tenant", name: "My Bookings", href: "/dashboard/tenant/bookings" },

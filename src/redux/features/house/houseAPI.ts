@@ -28,21 +28,20 @@ export const fetchLandlordHouses = (landlordId: string) => async (dispatch: AppD
 };
 
 // Create a new house listing
-export const createHouse =
-  (houseData: any) => async () => {
-    try {
-      const response = await axios.post(`${API_URL}/create`, houseData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Creating house failed:", error);
-      throw error;
-    }
-  };
+export const createHouse = async (houseData: any) => {
+  try {
+    const response = await axios.post(`${API_URL}/create-house`, houseData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Creating house failed:", error);
+    throw error;
+  }
+};
 
 // **Edit house**
 export const updateHouse =
