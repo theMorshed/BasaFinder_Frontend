@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import { fetchHousesStart, fetchHousesSuccess, fetchHousesFailure } from '@/redux/features/house/houseSlice';
-import axios from 'axios';
 import Link from 'next/link';
 import { deleteHouse, fetchHouses } from '@/redux/features/house/houseAPI';
 

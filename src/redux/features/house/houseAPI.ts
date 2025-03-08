@@ -19,7 +19,7 @@ export const fetchHouses = () => async (dispatch: AppDispatch) => {
 // Fetch all houses
 export const fetchLandlordHouses = (landlordId: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/${landlordId}`);
+    const response = await axios.get(`${API_URL}/landlord/${landlordId}`);
     return response.data.data;
   } catch (error) {
     console.error("Fetching houses failed:", error);
@@ -39,6 +39,17 @@ export const createHouse = async (houseData: any) => {
     return response.data;
   } catch (error) {
     console.error("Creating house failed:", error);
+    throw error;
+  }
+};
+
+// Fetch single house
+export const fetchSingleHouse = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await axios.get(`${API_URL}/${id}`);  
+    return response.data.data;
+  } catch (error) {
+    console.error("Fetching house failed:", error);
     throw error;
   }
 };

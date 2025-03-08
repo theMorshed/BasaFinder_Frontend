@@ -22,6 +22,7 @@ const LandlordHouseList = () => {
   const [houses, setHouses] = useState<THouse[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
+  const [updateKey, setUpdateKey] = useState(0);
   
   useEffect(() => {
     // Fetch the users on component mount
@@ -31,7 +32,7 @@ const LandlordHouseList = () => {
     }
 
     fetchAllHouses();
-  }, [dispatch]);
+  }, [dispatch, updateKey]);
 
   // const dispatch = useDispatch();
 
@@ -54,12 +55,14 @@ const LandlordHouseList = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteHouse(id); // Assuming you have a function to handle house deletion
-      dispatch(fetchHousesStart()); // Re-fetch houses after deletion
+      await dispatch(deleteHouse(id)); // Assuming you have a function to handle house deletion
+      setUpdateKey((prev) => prev + 1);
     } catch (err) {
       console.error("Error deleting house", err);
     }
   };
+
+
 
   return (
     <div className="container mx-auto py-6">
@@ -86,12 +89,12 @@ const LandlordHouseList = () => {
                   <td className="px-4 py-2 border-b">{house.bedrooms}</td>
                   <td className="px-4 py-2 border-b">{house.amenities.join(', ')}</td>
                   <td className="px-4 py-2 border-b">
-                    <Link href={`/admin/edit-house/${house._id}`} className="text-blue-500 mr-4">
+                    <Link href={`/dashboard/landlord/edit-house/${house._id}`} className="text-blue-500 mr-4">
                       Edit
                     </Link>
                     <button
                       onClick={() => handleDelete(house._id)}
-                      className="text-red-500"
+                      className="text-red-500 cursor-pointer"
                     >
                       Delete
                     </button>
