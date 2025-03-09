@@ -1,8 +1,23 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import Link from "next/link";
 
 const HeroBanner = () => {
+  const [role, setRole] = useState<string | null>(null);
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  useEffect(() => {
+    if (user?.role) {
+      setRole(user.role);
+    }
+  }, [user]);
+
+  if (role === null) return null; // Avoid rendering until role is known
+
   return (
     <div className="md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen container mx-auto py-16 px-6">
       {/* Left Content */}
@@ -18,9 +33,16 @@ const HeroBanner = () => {
         </p>
         {/* Action Button */}
         <div className="mt-6">
-          <Button className="bg-indigo-600 text-white hover:bg-indigo-500 px-6 py-3 rounded-lg text-lg">
-            Post Rental House
-          </Button>
+          {role === "landlord" ? (
+            <Link href="/dashboard/landlord/create-house"><Button className="bg-indigo-600 text-white hover:bg-indigo-500 px-6 py-3 rounded-lg text-lg cursor-pointer">
+              Post Rental House
+            </Button></Link>
+          ) : (
+            <Link href="/rental"><Button className="bg-indigo-600 text-white hover:bg-indigo-500 px-6 py-3 rounded-lg text-lg cursor-pointer">
+              All Rental House
+            </Button></Link>
+          )}
+
         </div>
       </div>
 

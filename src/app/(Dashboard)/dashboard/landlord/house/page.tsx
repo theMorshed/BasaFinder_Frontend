@@ -1,11 +1,9 @@
 "use client"
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
-import { fetchHousesStart, fetchHousesSuccess, fetchHousesFailure } from '@/redux/features/house/houseSlice';
 import Link from 'next/link';
-import { deleteHouse, fetchHouses, fetchLandlordHouses } from '@/redux/features/house/houseAPI';
+import { deleteHouse, fetchLandlordHouses } from '@/redux/features/house/houseAPI';
 
 type THouse = {
   _id: string;
@@ -34,25 +32,6 @@ const LandlordHouseList = () => {
     fetchAllHouses();
   }, [dispatch, updateKey]);
 
-  // const dispatch = useDispatch();
-
-  // // Access house data from Redux store
-  // const { houses, loading, error } = useSelector((state: RootState) => state.house);
-
-  // useEffect(() => {
-  //   const fetchHouses = async () => {
-  //     dispatch(fetchHousesStart());
-  //     try {
-  //       const response = await axios.get('http://localhost:5000/api/house');
-  //       dispatch(fetchHousesSuccess(response.data));
-  //     } catch (err) {
-  //       dispatch(fetchHousesFailure('Failed to load houses.'));
-  //     }
-  //   };
-
-  //   fetchHouses();
-  // }, [dispatch]);
-
   const handleDelete = async (id: string) => {
     try {
       await dispatch(deleteHouse(id)); // Assuming you have a function to handle house deletion
@@ -61,8 +40,6 @@ const LandlordHouseList = () => {
       console.error("Error deleting house", err);
     }
   };
-
-
 
   return (
     <div className="container mx-auto py-6">

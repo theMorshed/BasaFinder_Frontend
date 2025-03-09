@@ -1,41 +1,41 @@
-// pages/rentals.tsx
+"use client"
+import React, { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { fetchHouses } from '@/redux/features/house/houseAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux/store';
+import Link from 'next/link';
+import RentalRequestModal from '@/components/shared/RentalRequestModal';
 
-import Image from "next/image";
+type THouse = {
+  _id: string;
+  landloard: string;
+  location: string;
+  description: string;
+  rentAmount: number;
+  bedrooms: number;
+  amenities: string[];
+  images: string[];
+}
 
-const rentals = [
-  {
-    id: 1,
-    name: 'Modern Apartment in Downtown',
-    location: 'Downtown City',
-    price: 1200,
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
-  },
-  {
-    id: 2,
-    name: 'Cozy Studio near the Beach',
-    location: 'Sunny Beach',
-    price: 800,
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
-  },
-  {
-    id: 3,
-    name: 'Spacious House with Garden',
-    location: 'Green Valley',
-    price: 1500,
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
-  },
-  {
-    id: 4,
-    name: 'Charming Loft in the City Center',
-    location: 'City Center',
-    price: 1000,
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
-  },
-];
+const HouseListingPage = () => {
+    const [houses, setHouses] = useState<THouse[]>([]);
+    const [selectedHouse, setSelectedHouse] = useState<string | null>(null);
+    const dispatch = useDispatch<AppDispatch>();
+    const user = useSelector((state: RootState) => state.auth.user);
+    
+    useEffect(() => {
+        // Fetch the users on component mount
+        async function fetchAllHouses() {
+        const response = await dispatch(fetchHouses());
+        setHouses(response); // Make sure your API returns the correct format
+        }
 
-const RentalsPage = () => {
-  return (
-    <div className="bg-gray-50">
+        fetchAllHouses();
+    }, [dispatch]);
+
+    return (
+      <div>
         {/* Banner Section */}
         <div className="relative w-full h-64 bg-gray-800">
             <div className="absolute inset-0 flex items-center justify-center text-white">
@@ -44,37 +44,42 @@ const RentalsPage = () => {
                 </h1>
             </div>
         </div>
-
-      <main className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto">
-          <h1 className="text-4xl font-extrabold text-gray-800 mb-8">Available Rentals</h1>
-
-          {/* Rental Listings */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {rentals.map((rental) => (
-              <div
-                key={rental.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
-              >
-                <Image src={rental.image}
-                  alt={rental.name}
-                  className="w-full h-48 object-cover" width={500} height={400} />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800">{rental.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">{rental.location}</p>
-                  <p className="text-lg font-bold text-indigo-600 mb-4">${rental.price}/month</p>
-                  <button className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300">
-                    View Details
-                  </button>
+        {/* Rental House Listings */}
+        <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {houses.length > 0 ? (
+            houses.map((house) => (
+              <div key={house._id} className="bg-white shadow-lg rounded-lg p-4">
+                <img
+                  src={house.images?.[0] || "https://via.placeholder.com/300"}
+                  alt="House"
+                  className="w-full h-48 object-cover rounded-md"
+                />
+                <h3 className="text-xl font-semibold mt-4">{house.description}</h3>
+                <p className="text-gray-500">Location: {house.location}</p>
+                <p className="text-gray-500">${house.rentAmount}/month - {house.bedrooms} Bedrooms</p>
+                <div className='flex'>
+                  <Link href={`/rental/${house._id}`}>
+                    <Button className="mt-4 bg-indigo-600 text-white">
+                        View Details
+                    </Button>
+                  </Link>
+                  {user?.role === "tenant"? (<Button className="mt-4 ml-4 bg-indigo-600 text-white" onClick={() => setSelectedHouse(house._id)}>
+                      Rental Request
+                  </Button>) : ('')}
+                  
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </main>
-
-    </div>
-  );
+            ))
+          ) : (
+            <p className="text-gray-600 text-center col-span-3">No houses available.</p>
+          )}
+        </section>
+        {/* Rental Request Modal */}
+        {selectedHouse && (
+          <RentalRequestModal houseId={selectedHouse} onClose={() => setSelectedHouse(null)} />
+        )}
+      </div>
+    );
 };
 
-export default RentalsPage;
+export default HouseListingPage;
