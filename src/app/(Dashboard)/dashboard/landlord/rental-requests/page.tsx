@@ -3,11 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { fetchTenantRequests } from "@/redux/features/rental/rentalAPI";
-import { Button } from "@/components/ui/button";
+import { fetchLandlordRequests, updateRequest } from "@/redux/features/rental/rentalAPI";
 
 // Define the type for a rental request
-interface ITenantRequest {
+interface IRentalRequest {
     _id: string;
     tenant: string;  // Assuming tenant is an ID, you might want to display the name later
     house: string;   // House is also an ID, you can fetch the house details later
@@ -20,18 +19,32 @@ interface ITenantRequest {
 
 const TenantRequestsTable = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const [tenantRequests, setTenantRequests] = useState<ITenantRequest[]>([]);
+    const [landlordRequests, setLandlordRequests] = useState<IRentalRequest[]>([]);
     const user = useSelector((state: RootState) => state.auth.user);
 
     useEffect(() => {
         // Fetch the users on component mount
-        async function fetchAllTenantRequests() {
-            const response = await dispatch(fetchTenantRequests(user?.id as string));
-            setTenantRequests(response); // Assuming response is an array of requests
+        async function fetchAllLandlordRequests() {
+            const response = await dispatch(fetchLandlordRequests(user?.id as string));
+            setLandlordRequests(response); // Assuming response is an array of requests
         }
 
-        fetchAllTenantRequests();
+        fetchAllLandlordRequests();
     }, [dispatch]);
+
+    const handleRequestStatus = async (requestId: string, status: string) => {
+        try {
+            const updatedRequest = await dispatch(updateRequest(requestId, status ));
+            setLandlordRequests((prevRequests) =>
+                prevRequests.map((request) =>
+                    request._id === requestId ? { ...request, status: updatedRequest.status } : request
+                )
+            );
+            alert("status updated successfully!");
+        } catch (error) {
+            console.error("Error updating status", error);
+        }
+    };    
 
     return (
         <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md">
@@ -44,22 +57,26 @@ const TenantRequestsTable = () => {
                 <th className="border px-4 py-2">Move-In Date</th>
                 <th className="border px-4 py-2">Rental Duration(months)</th>
                 <th className="border px-4 py-2">Status</th>
-                <th className="border px-4 py-2">Landlord Number</th>
                 <th className="border px-4 py-2">Payment Status</th>
             </tr>
             </thead>
             <tbody>
-            {tenantRequests.map((request: any) => (
+            {landlordRequests.map((request: any) => (
                 <tr key={request._id}>
                 <td className="border px-4 py-2">{request.tenant.name}</td>
                 <td className="border px-4 py-2">{request.house.location}</td>
                 <td className="border px-4 py-2">{new Date(request.moveInDate).toLocaleDateString()}</td>
                 <td className="border px-4 py-2">{request.rentalDuration}</td>
-                <td className="border px-4 py-2">{
-                request.status === "approved" ? <>{request.status} - <Button>Pay Now</Button></> : request.status
-                }</td>
                 <td className="border px-4 py-2">
-                    {request.status === "approved" ? request.landlordPhone : ''}
+                    <select
+                        value={request.status}
+                        onChange={(e) => handleRequestStatus(request._id, e.target.value)}
+                        className="border px-4 py-2 rounded-md"
+                     >
+                        <option value={`${request.status}`}>{request.status}</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
                 </td>
                 <td className="border px-4 py-2">{request.paymentStatus}</td>
                 </tr>

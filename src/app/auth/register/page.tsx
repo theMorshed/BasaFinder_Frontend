@@ -10,6 +10,7 @@ import Link from "next/link";
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("tenant"); // Default role is 'tenant'
@@ -25,7 +26,7 @@ export default function RegisterPage() {
       return;
     }
     try {
-      await dispatch(register(name, email, password, role)); // Pass all fields to the register action
+      await dispatch(register(name, email, phone, password, role)); // Pass all fields to the register action
       router.push('/auth/login');
     } catch (err) {
       setError("Registration failed. Please try again.");
@@ -64,6 +65,19 @@ export default function RegisterPage() {
                       onChange={(e) => setEmail(e.target.value)}
                       className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       placeholder="Enter your email"
+                      required
+                  />
+              </div>
+
+              <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+                  <input
+                      id="phone"
+                      type="number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      placeholder="Enter your phone number"
                       required
                   />
               </div>

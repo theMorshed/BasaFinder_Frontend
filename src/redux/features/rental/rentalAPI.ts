@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
+import { trackSynchronousRequestDataAccessInDev } from "next/dist/server/app-render/dynamic-rendering";
 
 const API_URL = "http://localhost:5000/api/rental-request"; // Your backend house API URL
 
@@ -49,7 +50,10 @@ export const fetchTenantRequests = (tenantId: string) => async (dispatch: AppDis
 // Fetch all houses
 export const fetchLandlordRequests = (landlordId: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/landlord/${landlordId}`);
+    const response = await axios.get(`${API_URL}/landlord/${landlordId}`, {
+      headers: {
+        Authorization: `${localStorage.getItem("accessToken")}`
+      }});
     return response.data.data;
   } catch (error) {
     console.error("Fetching houses failed:", error);
@@ -57,45 +61,66 @@ export const fetchLandlordRequests = (landlordId: string) => async (dispatch: Ap
   }
 };
 
-// Fetch single house
-export const fetchSingleHouse = (id: string) => async (dispatch: AppDispatch) => {
+// Update an existing user's role
+export const updateRequest = (requestId: string, status: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);  
-    return response.data.data;
-  } catch (error) {
-    console.error("Fetching house failed:", error);
-    throw error;
-  }
-};
-
-// **Edit house**
-export const updateHouse =
-  (id: string, houseData: any) => async () => {
-    try {
-      const response = await axios.put(`${API_URL}/${id}`, houseData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Updating house failed:", error);
-      throw error;
-    }
-  };
-
-// Delete a house
-export const deleteHouse = (id: string) => async () => {
-  try {
-    await axios.delete(`${API_URL}/${id}`, {
+    let response;
+    if (status === 'approved') {
+      response = await axios.patch(`${API_URL}/${requestId}/approve`, {status}, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+        Authorization: `${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      }});
+    } else {
+      response = await axios.patch(`${API_URL}/${requestId}/reject`);
+    }
+    
+    return response.data.data; // Assuming backend responds with the updated user
   } catch (error) {
-    console.error("Deleting house failed:", error);
-    throw error;
+    console.error("Error updating user role:", error);
+    throw error; // Handle errors
   }
 };
+
+// // Fetch single house
+// export const fetchSingleHouse = (id: string) => async (dispatch: AppDispatch) => {
+//   try {
+//     const response = await axios.get(`${API_URL}/${id}`);  
+//     return response.data.data;
+//   } catch (error) {
+//     console.error("Fetching house failed:", error);
+//     throw error;
+//   }
+// };
+
+// // **Edit house**
+// export const updateHouse =
+//   (id: string, houseData: any) => async () => {
+//     try {
+//       const response = await axios.put(`${API_URL}/${id}`, houseData, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//           "Content-Type": "application/json",
+//         },
+//       });
+//       return response.data;
+//     } catch (error) {
+//       console.error("Updating house failed:", error);
+//       throw error;
+//     }
+//   };
+
+// // Delete a house
+// export const deleteHouse = (id: string) => async () => {
+//   try {
+//     await axios.delete(`${API_URL}/${id}`, {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//       },
+//     });
+//   } catch (error) {
+//     console.error("Deleting house failed:", error);
+//     throw error;
+//   }
+// };
 

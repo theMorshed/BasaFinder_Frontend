@@ -27,8 +27,8 @@ const HouseListingPage = () => {
     useEffect(() => {
         // Fetch the users on component mount
         async function fetchAllHouses() {
-        const response = await dispatch(fetchHouses());
-        setHouses(response); // Make sure your API returns the correct format
+          const response = await dispatch(fetchHouses());
+          setHouses(response); // Make sure your API returns the correct format
         }
 
         fetchAllHouses();

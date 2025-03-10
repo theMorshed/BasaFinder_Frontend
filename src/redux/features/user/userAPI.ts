@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
@@ -36,6 +37,28 @@ export const updateUserRole = (userId: string, role: string) => async (dispatch:
   } catch (error) {
     console.error("Error updating user role:", error);
     throw error; // Handle errors
+  }
+};
+
+// Update an user
+export const getAUser = (id: string) => async () => {
+  try {
+    const response = await axios.get(`${API_URL}/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error("get user failed:", error);
+    throw error;
+  }
+};
+
+// Update an user
+export const updateUser = (id: string, userData: any) => async () => {
+  try {
+    const response = await axios.put(`${API_URL}/${id}`, userData);
+    return response.data;
+  } catch (error) {
+    console.error("Updating user failed:", error);
+    throw error;
   }
 };
 

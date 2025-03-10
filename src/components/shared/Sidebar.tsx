@@ -14,11 +14,13 @@ const Sidebar: FC<SidebarProps> = ({ user, handleLogout }) => {
     { role: "admin", name: "Manage Users", href: "/dashboard/admin/users" },
     { role: "admin", name: "Manage Rental House", href: "/dashboard/admin/house" },
     { role: "admin", name: "Create House", href: "/dashboard/admin/create-house" },
+    { role: "admin", name: "Profile Settings", href: "/dashboard/admin/profile" },
     { role: "landlord", name: "Manage Properties", href: "/dashboard/landlord/house" },
     { role: "landlord", name: "Create House", href: "/dashboard/landlord/create-house" },
-    { role: "landlord", name: "View Tenants", href: "/dashboard/landlord/tenants" },
+    { role: "landlord", name: "Rental Requests", href: "/dashboard/landlord/rental-requests" },
+    { role: "landlord", name: "Profile Settings", href: "/dashboard/landlord/profile" },
     { role: "tenant", name: "View Rentals", href: "/dashboard/tenant/rentals" },
-    { role: "tenant", name: "My Bookings", href: "/dashboard/tenant/bookings" },
+    { role: "tenant", name: "Profile Settings", href: "/dashboard/tenant/profile" },
   ];
 
   return (

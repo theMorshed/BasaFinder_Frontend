@@ -28,18 +28,6 @@ export default function AdminUserManagementPage() {
     fetchUsers();
   }, [dispatch]);
 
-//   const handleCreateUser = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     try {
-//       await dispatch(createUser({ email: newUserEmail, role: newUserRole }));
-//       setNewUserEmail("");
-//       setNewUserRole("user"); // Reset after successful creation
-//       alert("User created successfully!");
-//     } catch (error) {
-//       console.error("Error creating user", error);
-//     }
-//   };
-
   const handleDeactivateUser = async (userId: string, isBlocked: boolean) => {
     try {
       await dispatch(deleteUser(userId, isBlocked));
@@ -72,36 +60,6 @@ export default function AdminUserManagementPage() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold text-sky-800">Manage Users</h1>
-      
-      {/* Create New User Form */}
-      {/* <form onSubmit={handleCreateUser} className="mt-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-          <input
-            type="email"
-            value={newUserEmail}
-            onChange={(e) => setNewUserEmail(e.target.value)}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
-          <select
-            value={newUserRole}
-            onChange={(e) => setNewUserRole(e.target.value)}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-
-        <button type="submit" className="mt-4 py-2 px-4 bg-sky-800 text-white rounded-md">
-          Create User
-        </button>
-      </form> */}
 
       {/* User List */}
       <h2 className="mt-8 text-xl font-semibold text-gray-700 dark:text-gray-300">User List</h2>
@@ -139,9 +97,6 @@ export default function AdminUserManagementPage() {
                             <option value="tenant">Tenant</option>
                         </>)
                     }
-                    {/* <option value={`${user.role}`}>{user.role}</option>
-                    <option value="tenanat">Tenant</option>
-                    <option value="landlord">Landlord</option> */}
                   </select>
                 </td>
                 <td className="border p-2">

@@ -21,10 +21,10 @@
   };
 
   // Register function
-  export const register = (name: string, email: string, password: string, role: string) => async () => {
+  export const register = (name: string, email: string, phoneNumber: string, password: string, role: string) => async () => {
     try {
       // Sending user registration data to the backend
-      const response = await axios.post(`${API_URL}/register-user`, { name, email, password, role });
+      const response = await axios.post(`${API_URL}/register-user`, { name, email, phoneNumber,  password, role });
       console.log(response);
       // Assuming the backend responds with a success message and the access token
       // const { accessToken } = response.data.data;

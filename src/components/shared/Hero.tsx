@@ -16,7 +16,7 @@ const HeroBanner = () => {
     }
   }, [user]);
 
-  if (role === null) return null; // Avoid rendering until role is known
+  // if (role === null) return null; // Avoid rendering until role is known
 
   return (
     <div className="md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen container mx-auto py-16 px-6">

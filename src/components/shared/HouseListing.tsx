@@ -6,6 +6,7 @@ import { fetchHouses } from '@/redux/features/house/houseAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import Link from 'next/link';
+import RentalRequestModal from './RentalRequestModal';
 
 type THouse = {
   _id: string;
@@ -19,6 +20,7 @@ type THouse = {
 }
 
 const HouseListing = () => {
+    const [selectedHouse, setSelectedHouse] = useState<string | null>(null);
     const [houses, setHouses] = useState<THouse[]>([]);
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.auth.user);
@@ -26,8 +28,8 @@ const HouseListing = () => {
     useEffect(() => {
         // Fetch the users on component mount
         async function fetchAllHouses() {
-        const response = await dispatch(fetchHouses());
-        setHouses(response); // Make sure your API returns the correct format
+          const response = await dispatch(fetchHouses());
+          setHouses(response); // Make sure your API returns the correct format
         }
 
         fetchAllHouses();
@@ -67,22 +69,27 @@ const HouseListing = () => {
               <p className="text-gray-500">Location: {house.location}</p>
               <p className="text-gray-500">${house.rentAmount}/month - {house.bedrooms} Bedrooms</p>
               <div className='flex'>
-                <Link href={`/rental/${house._id}`}>
-                  <Button className="mt-4 bg-indigo-600 text-white">
-                      View Details
-                  </Button>
-                </Link>
-                {user?.role === "tenant"? (<Button className="mt-4 ml-4 bg-indigo-600 text-white">
-                    Rental Request
-                </Button>) : ('')}
-                
-              </div>
+                  <Link href={`/rental/${house._id}`}>
+                    <Button className="mt-4 bg-indigo-600 text-white">
+                        View Details
+                    </Button>
+                  </Link>
+                  {user?.role === "tenant"? (<Button className="mt-4 ml-4 bg-indigo-600 text-white" onClick={() => setSelectedHouse(house._id)}>
+                      Rental Request
+                  </Button>) : ('')}
+                  
+                </div>
             </div>
           ))
         ) : (
           <p className="text-gray-600 text-center col-span-3">No houses available.</p>
         )}
       </section>
+
+      {/* Rental Request Modal */}
+      {selectedHouse && (
+        <RentalRequestModal houseId={selectedHouse} onClose={() => setSelectedHouse(null)} />
+      )}
 
       {/* "See All Houses" Button */}
       <div className="flex justify-center mt-6">
