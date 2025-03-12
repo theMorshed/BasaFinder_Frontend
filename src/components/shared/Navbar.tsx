@@ -45,7 +45,6 @@ const Navbar = () => {
                             <Link href="/about" className="hover:text-sky-950">About Us</Link>
                             <Link href="/rental" className="hover:text-sky-950">All Rentals</Link>
                             <Link href={`/dashboard/${user.role}`} className="hover:text-sky-950">Dashboard</Link>
-                            <Link href="/dashboard/profile" className="hover:text-sky-950">My Profile</Link>
                             <Link onClick={handleLogout} href="/auth/login" className="hover:text-sky-950">Logout</Link>
                         </>
                     ): (
