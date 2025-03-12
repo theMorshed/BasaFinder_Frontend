@@ -3,7 +3,7 @@
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
 
-const API_URL = "http://localhost:5000/api/rental-request"; // Your backend house API URL
+const API_URL = "https://basafinderbackend.vercel.app/api/rental-request"; // Your backend house API URL
 
 // Create a new house listing
 export const createRentalRequest = async (requestData: any) => {

@@ -3,7 +3,7 @@
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
 
-const API_URL = "http://localhost:5000/api/house"; // Your backend house API URL
+const API_URL = "https://basafinderbackend.vercel.app/api/house"; // Your backend house API URL
 
 // Fetch all houses
 export const fetchHouses = () => async (dispatch: AppDispatch) => {

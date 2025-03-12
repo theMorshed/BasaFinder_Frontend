@@ -3,7 +3,7 @@
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
 
-const API_URL = "http://localhost:5000/api/user"; // Replace with your backend API URL
+const API_URL = "https://basafinderbackend.vercel.app/api/user"; // Replace with your backend API URL
 
 // Fetch all users
 export const getUsers = () => async (dispatch: AppDispatch) => {

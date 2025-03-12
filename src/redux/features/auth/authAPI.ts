@@ -2,7 +2,7 @@
   import { loginSuccess, logout } from "./authSlice";
   import { AppDispatch } from "@/redux/store";
 
-  const API_URL = "http://localhost:5000/api/user"; // Your backend auth API URL
+  const API_URL = "https://basafinderbackend.vercel.app/api/user"; // Your backend auth API URL
 
   export const login = (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
