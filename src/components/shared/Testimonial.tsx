@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
@@ -38,9 +39,9 @@ const TestimonialSection = () => {
             <FaQuoteLeft className="text-indigo-600 text-3xl mx-auto mb-4" />
             <p className="text-gray-700 text-lg italic">{testimonial.text}</p>
             <div className="mt-6 flex flex-col items-center">
-              <img
+              <Image
                 src={testimonial.image}
-                alt={testimonial.name}
+                alt={testimonial.name} width={300} height={300}
                 className="w-16 h-16 rounded-full border-2 border-indigo-600"
               />
               <h4 className="text-lg font-semibold mt-3">{testimonial.name}</h4>

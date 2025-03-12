@@ -30,7 +30,7 @@ const LandlordHouseList = () => {
     }
 
     fetchAllHouses();
-  }, [dispatch, updateKey]);
+  }, [dispatch, updateKey, user?.id]);
 
   const handleDelete = async (id: string) => {
     try {

@@ -31,7 +31,7 @@ const TenantRequestsTable = () => {
         }
 
         fetchAllTenantRequests();
-    }, [dispatch]);
+    }, [dispatch, user?.id]);
 
     return (
         <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md">

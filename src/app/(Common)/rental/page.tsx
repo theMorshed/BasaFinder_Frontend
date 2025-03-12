@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import Link from 'next/link';
 import RentalRequestModal from '@/components/shared/RentalRequestModal';
+import Image from 'next/image';
 
 type THouse = {
   _id: string;
@@ -49,9 +50,9 @@ const HouseListingPage = () => {
           {houses.length > 0 ? (
             houses.map((house) => (
               <div key={house._id} className="bg-white shadow-lg rounded-lg p-4">
-                <img
+                <Image
                   src={house.images?.[0] || "https://via.placeholder.com/300"}
-                  alt="House"
+                  alt="House" width={600} height={400}
                   className="w-full h-48 object-cover rounded-md"
                 />
                 <h3 className="text-xl font-semibold mt-4">{house.description}</h3>

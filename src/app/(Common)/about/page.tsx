@@ -1,5 +1,7 @@
 // pages/about.tsx
 
+import Image from "next/image";
+
 const AboutUs = () => {
   return (
     <div className="bg-gray-50">
@@ -60,17 +62,17 @@ const AboutUs = () => {
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">Meet Our Team</h2>
             <div className="flex flex-wrap gap-8">
               <div className="w-full sm:w-1/3 lg:w-1/4 bg-white p-6 rounded-lg shadow-lg">
-                <img className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="Team Member 1" />
+                <Image className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" width={200} height={200} alt="Team Member 1" />
                 <h3 className="text-xl font-semibold text-gray-800">John Doe</h3>
                 <p className="text-gray-600">CEO & Founder</p>
               </div>
               <div className="w-full sm:w-1/3 lg:w-1/4 bg-white p-6 rounded-lg shadow-lg">
-                <img className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="Team Member 2" />
+                <Image className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" width={200} height={200} alt="Team Member 2" />
                 <h3 className="text-xl font-semibold text-gray-800">Jane Smith</h3>
                 <p className="text-gray-600">COO</p>
               </div>
               <div className="w-full sm:w-1/3 lg:w-1/4 bg-white p-6 rounded-lg shadow-lg">
-                <img className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="Team Member 3" />
+                <Image className="w-32 h-32 rounded-full mx-auto mb-4" src="https://avatar.iran.liara.run/public/boy?username=Ash" width={200} height={200} alt="Team Member 3" />
                 <h3 className="text-xl font-semibold text-gray-800">Michael Brown</h3>
                 <p className="text-gray-600">CTO</p>
               </div>

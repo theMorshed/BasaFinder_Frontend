@@ -30,7 +30,7 @@ const TenantRequestsTable = () => {
         }
 
         fetchAllLandlordRequests();
-    }, [dispatch]);
+    }, [dispatch, user?.id]);
 
     const handleRequestStatus = async (requestId: string, status: string) => {
         try {

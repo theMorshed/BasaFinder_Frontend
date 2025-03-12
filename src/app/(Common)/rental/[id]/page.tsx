@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { fetchSingleHouse } from "@/redux/features/house/houseAPI";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 type THouse = {
   _id: string;
@@ -43,9 +44,9 @@ const HouseDetails = () => {
       </div>
       <div className="container mx-auto p-6 min-h-screen mt-20">
         <h1 className="text-3xl font-bold mb-7">{house.description}</h1>
-        <img
+        <Image
           src={house.images?.[0] || "https://via.placeholder.com/600"}
-          alt="House"
+          alt="House" width={1024} height={600}
           className="w-full h-96 object-cover rounded-lg"
         />
         <p className="text-lg mt-4">📍 Location: {house.location}</p>

@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { AppDispatch } from "@/redux/store";
-import { trackSynchronousRequestDataAccessInDev } from "next/dist/server/app-render/dynamic-rendering";
 
 const API_URL = "http://localhost:5000/api/rental-request"; // Your backend house API URL
 

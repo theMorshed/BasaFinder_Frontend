@@ -41,7 +41,7 @@ const ProfilePage = () => {
     }
 
     fetchAUser();
-  }, [dispatch, user?.id]);
+  }, [dispatch, user?.id, user]);
 
   // Update form data when currentUser changes
   useEffect(() => {
