@@ -15,12 +15,15 @@ const Sidebar: FC<SidebarProps> = ({ user, handleLogout }) => {
     { role: "admin", name: "Manage Rental House", href: "/dashboard/admin/house" },
     { role: "admin", name: "Create House", href: "/dashboard/admin/create-house" },
     { role: "admin", name: "Profile Settings", href: "/dashboard/admin/profile" },
+    { role: "admin", name: "Change Password", href: "/dashboard/admin/change-password" },
     { role: "landlord", name: "Manage Properties", href: "/dashboard/landlord/house" },
     { role: "landlord", name: "Create House", href: "/dashboard/landlord/create-house" },
     { role: "landlord", name: "Rental Requests", href: "/dashboard/landlord/rental-requests" },
+    { role: "landlord", name: "Change Password", href: "/dashboard/landlord/change-password" },
     { role: "landlord", name: "Profile Settings", href: "/dashboard/landlord/profile" },
     { role: "tenant", name: "View Rentals", href: "/dashboard/tenant/rentals" },
     { role: "tenant", name: "Profile Settings", href: "/dashboard/tenant/profile" },
+    { role: "tenant", name: "Change Password", href: "/dashboard/tenant/change-password" },
   ];
 
   return (

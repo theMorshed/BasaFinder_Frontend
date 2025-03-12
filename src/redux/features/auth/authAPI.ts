@@ -25,19 +25,7 @@
     try {
       // Sending user registration data to the backend
       const response = await axios.post(`${API_URL}/register-user`, { name, email, phoneNumber,  password, role });
-      console.log(response);
-      // Assuming the backend responds with a success message and the access token
-      // const { accessToken } = response.data.data;
-      
-      // Store the access token in localStorage
-      // localStorage.setItem("accessToken", accessToken);
-      
-      // Dispatch the loginSuccess action with the access token
-      // dispatch(loginSuccess({ accessToken }));
-
-      // You can also redirect the user to the login page or dashboard after successful registration
-      // Example: router.push("/login");
-
+      return response;
     } catch (error) {
       console.error("Registration failed:", error);
       // Handle registration failure (show error message or other actions)
@@ -64,4 +52,20 @@
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     dispatch(logout());
+  };
+
+  // change password
+  export const changePassword = (currentPassword: string, newPassword: string, confirmPassword: string) => async (dispatch: AppDispatch) => {
+    try {
+      const response = await axios.post(`${API_URL}/change-password`, { currentPassword, newPassword, confirmPassword }, {
+        headers: {
+          Authorization: `${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+      });
+      dispatch(logout());
+      return response;
+    } catch (error) {
+      console.error("Change Password failed:", error);
+    }
   };
