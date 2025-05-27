@@ -61,7 +61,7 @@ const TenantRequestsTable = () => {
             </tr>
             </thead>
             <tbody>
-            {landlordRequests.map((request: any) => (
+            {landlordRequests?.map((request: any) => (
                 <tr key={request._id}>
                 <td className="border px-4 py-2">{request.tenant.name}</td>
                 <td className="border px-4 py-2">{request.house.location}</td>
