@@ -12,6 +12,7 @@ interface ITenantRequest {
     tenant: string;  // Assuming tenant is an ID, you might want to display the name later
     house: string;   // House is also an ID, you can fetch the house details later
     landlord: string;
+    location: string;
     moveInDate: Date;
     rentalDuration: string;
     status: "pending" | "approved" | "rejected" | "approved-pending-payment" | "rented";
