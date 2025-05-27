@@ -12,7 +12,6 @@ interface ITenantRequest {
     tenant: string;  // Assuming tenant is an ID, you might want to display the name later
     house: string;   // House is also an ID, you can fetch the house details later
     landlord: string;
-    location: string;
     moveInDate: Date;
     rentalDuration: string;
     status: "pending" | "approved" | "rejected" | "approved-pending-payment" | "rented";
@@ -53,7 +52,7 @@ const TenantRequestsTable = () => {
             {tenantRequests?.map((request: any) => (
                 <tr key={request._id}>
                 <td className="border px-4 py-2">{request.tenant.name}</td>
-                <td className="border px-4 py-2">{request.house.location}</td>
+                <td className="border px-4 py-2">{request.house?.location}</td>
                 <td className="border px-4 py-2">{new Date(request.moveInDate).toLocaleDateString()}</td>
                 <td className="border px-4 py-2">{request.rentalDuration}</td>
                 <td className="border px-4 py-2">{
